@@ -4,20 +4,26 @@ class DashboardController < ApplicationController
 	require 'open-uri'
 	
 	def index
-		@all=[]
 		url = "https://play.google.com/store/apps"
-		@page = Nokogiri(open(url))
-		@data = @page.css("a.see-more")
-		@data.each do |d|
-			@all.append(d['href'])
+		@page = Nokogiri::HTML(open(url))
+		#@data = @page.css("a.dev-link")[0]["href"]
+		@data1 = @page.css("a.see-more")
+		@data = []
+		@data1.each do |d|
+			@data << d["href"]
+			@url1 = "https://play.google.com" + d["href"]
+			@all_apps = Nokogiri::HTML(open(@url1))
+			@app_urls = @all_apps.css("a.card-click-target")
+			@app_name = []
+			@app_urls=@app_urls.top(5)
+			@app_urls.each do |a|
+				@app_name << a["href"]
+				@url_app = "https://play.google.com" + a["href"]
+				@app_info = Nokogiri::HTML(open(@url_app))
+				@all_names = @app_info.css("div.id-app-title")
+				@all_emails = @app_info.css("a.dev-link")[1]["href"]
+			end
 		end
-		app_info=[]
-		@all.each do |n|
-			@u= "https://play.google.com"+n
-			@page1 = Nokogiri(open(url))
-			#@app_info.append(@page1.css("div.id"app-title"))
-		end
-	end
-	def show
+		#@test=
 	end
 end
