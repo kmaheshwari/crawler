@@ -3,8 +3,8 @@ class DashboardController < ApplicationController
 	require 'nokogiri'   
 	require 'open-uri'
 	def index
-		url = "https://play.google.com/store/apps/category/LIFESTYLE"
+		url = "https://play.google.com/store/apps/details?id=com.inditex.zara"
 		@page = Nokogiri::HTML(open(url))
-		@data = @page.css("a.see-more")
+		#@data = @page.css("a.dev-link")[0]["href"]
 	end
 end
