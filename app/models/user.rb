@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
+	#permit_params 
 	def self.from_omniauth(auth)
-    where(provider: auth.provider, uid: auth.uid).first_or_initialize.tap do |user|
+    where(provider: auth.provider, uid: auth.uid).first_or_initialize do |user|
       user.provider = auth.provider
       user.uid = auth.uid
       user.name = auth.info.name
@@ -9,4 +10,5 @@ class User < ActiveRecord::Base
       user.save!
     end
   end
+
 end

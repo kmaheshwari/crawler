@@ -20,7 +20,7 @@ class DashboardController < ApplicationController
 				@url_app = "https://play.google.com" + a["href"]
 				@app_info = Nokogiri::HTML(open(@url1))
 				@all_names = @app_info.css("div.id-app-title")
-				@all_emails = @app_info.css("a.dev-link")[0]["href"]
+				@all_emails = @app_info.css("a.dev-link")["href"]
 			end
 		end
 		#@test=
