@@ -1,5 +1,10 @@
 class AppStore
   include Sidekiq::Worker
+  include Sidetiq::Schedulable
+    recurrence {
+	    hourly(2)
+    }
+
   def perform
   	url = "https://play.google.com/store/apps"
 		@page = Nokogiri::HTML(open(url))
@@ -27,5 +32,4 @@ class AppStore
 			@all_names.uniq!
 			@all_emails.uniq!
 		end
-    
-  end
+ end
