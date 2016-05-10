@@ -15,13 +15,15 @@ class DashboardController < ApplicationController
 			@all_apps = Nokogiri::HTML(open(@url1))
 			@app_urls = @all_apps.css("a.card-click-target")
 			@app_name = []
-			@app_urls=@app_urls.top(5)
-			@app_urls.each do |a|
+			@all_names=[]
+			@all_emails=[]
+			@app_urls[0..3].each do |a|
+
 				@app_name << a["href"]
 				@url_app = "https://play.google.com" + a["href"]
 				@app_info = Nokogiri::HTML(open(@url_app))
-				@all_names = @app_info.css("div.id-app-title")
-				@all_emails = @app_info.css("a.dev-link")[1]["href"]
+				@all_names << @app_info.css("div.id-app-title").text
+				@all_emails << @app_info.css("a.dev-link")[1]["href"]
 			end
 		end
 		#@test=
