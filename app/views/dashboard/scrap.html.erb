@@ -1,0 +1,28 @@
+
+<br><br><br>
+<table>
+<% @data1.each do |d| %>
+	<h2><b><%= d["aria-label"]%></b></h2>
+	<br><br>
+	<%@url1 = "https://play.google.com" + d["href"]%>
+	<% @all_apps = Nokogiri::HTML(open(@url1)) %>
+	<% @app_urls = @all_apps.css("a.title")%>
+	<% @app_urls.each do |a|%>
+		<% @url_app = "https://play.google.com" + a["href"]%>
+		<% @app_info = Nokogiri::HTML(open(@url_app)) rescue nil %>
+		<tr><%= @app_info.css("div.id-app-title").text %></tr>
+		<% @dev_link = @app_info.css("a.dev-link") %>
+		<% @dev_link.each do |dl| %> 
+			<% if dl["href"][0..6] == "mailto:" %>
+				<tr><%= "  --  " + dl["href"][7..-1] %></tr>
+			<%end%>
+		<%end%>
+		<br><br>
+	<%end%>	
+	<br><br>
+<%end%>
+</table>
+
+
+
+
