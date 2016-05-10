@@ -1,4 +1,14 @@
 
-<%= @data %>
-<%= @all_names%>
-<%= @all_emails%>
+
+
+<h2> Select a cateogry </h2>
+
+<%= form_tag(dashboard_scrap_path, method: "post") do %>
+
+
+<%= select_tag(:cateogry, options_for_select([['Comics', "https://play.google.com/store/apps/category/COMICS/collection/topselling_paid"], ['Games - Action', "https://play.google.com/store/apps/category/GAME_ACTION"],['Games - Arcade',"https://play.google.com/store/apps/category/GAME_ARCADE"] ])) %>
+
+
+<%= submit_tag "Submit" %>
+
+<% end %>
