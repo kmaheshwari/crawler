@@ -1,0 +1,29 @@
+
+
+<%= @om %>
+
+<% @page.css("div.details").each do |item| %>
+
+	<%=  item.css("a").text %>
+
+	<%  url_developer =  item.css("a")[1]["href"] %>
+
+	<% url2 = "https://play.google.com#{url_developer}"  %>
+	<br>
+
+	<% email = Nokogiri::HTML(open(url2)) %>
+
+	<% email_value =  email.css("a.dev-link")[1].to_s %>
+
+
+	<% index_chop = email_value.index(">").to_i %>
+
+
+	Developer's Email : <%= email_value[index_chop+6..-5] %>
+
+<br><br>
+<% end %>
+
+
+
+

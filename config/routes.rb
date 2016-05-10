@@ -7,7 +7,14 @@ Rails.application.routes.draw do
   resources :sessions, only: [:create, :destroy]
   resource :home, only: [:show]
 
-  root to: "dashboard#show"
+  root to: "dashboard#scrap"
+
+  get 'dashboard' => 'dashboard#index'
+
+
+
+  post 'dashboard/scrap' =>'dashboard#scrap'
+  
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -22,7 +29,7 @@ Rails.application.routes.draw do
 
   # Example resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
-  get 'dashboard' => 'dashboard#index'
+
   # Example resource route with options:
   #   resources :products do
   #     member do
