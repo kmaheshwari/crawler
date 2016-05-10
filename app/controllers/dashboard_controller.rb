@@ -17,13 +17,16 @@ class DashboardController < ApplicationController
 			@app_name = []
 			@all_names = []
 			@all_emails = []
-			@app_urls[0..8].each do |a|
+			@app_urls.each do |a|
 				@app_name << a["href"]
 				@url_app = "https://play.google.com" + a["href"]
 				@app_info = Nokogiri::HTML(open(@url_app)) rescue nil
 				@all_names << @app_info.css("div.id-app-title").text
-				if not @app_info.css("a.dev-link")[1].nil?
-					@all_emails << @app_info.css("a.dev-link")[1]["href"]
+				@dev_link = @app_info.css("a.dev-link")
+				@dev_link.each do |dl|
+					if dl["href"][0..6] == "mailto:"
+						@all_emails << dl["href"][7..-1]
+					end
 				end
 			end
 			@all_names.uniq!
