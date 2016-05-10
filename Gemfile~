@@ -25,9 +25,6 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'spreadsheet'
 
-gem 'sidekiq'                       #background jobs
-gem 'sidetiq'                        #repeat jobs for sidekiq workers
-gem 'sinatra' ,require: false
 
 gem 'pry'
 # Use ActiveModel has_secure_password

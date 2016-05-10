@@ -1,3 +1,4 @@
+
 Rails.application.routes.draw do
   
   get 'auth/:provider/callback', to: 'sessions#create'
@@ -7,13 +8,17 @@ Rails.application.routes.draw do
   resources :sessions, only: [:create, :destroy]
   resource :home, only: [:show]
 
+require 'sidekiq/web'
+
+  mount Sidekiq::Web ,at: '/sidekiq'
+
   root to: "dashboard#show"
 
   get 'dashboard' => 'dashboard#index'
 
-
-
   post 'dashboard/scrap' =>'dashboard#scrap'
+
+
   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
