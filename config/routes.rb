@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   resources :sessions, only: [:create, :destroy]
   resource :home, only: [:show]
 
-  root to: "dashboard#scrap"
+  root to: "dashboard#show"
 
   get 'dashboard' => 'dashboard#index'
 

@@ -1,4 +1,3 @@
-
 <br><br><br>
 <table>
 <% @data1.each do |d| %>
@@ -10,7 +9,7 @@
 	<% @app_urls.each do |a|%>
 		<% @url_app = "https://play.google.com" + a["href"]%>
 		<% @app_info = Nokogiri::HTML(open(@url_app)) rescue nil %>
-		<tr><%= @app_info.css("div.id-app-title").text %></tr>
+		<tr><b><%= @app_info.css("div.id-app-title").text %></b></tr>
 		<% @dev_link = @app_info.css("a.dev-link") %>
 		<% @dev_link.each do |dl| %> 
 			<% if dl["href"][0..6] == "mailto:" %>
@@ -22,7 +21,3 @@
 	<br><br>
 <%end%>
 </table>
-
-
-
-

@@ -4,6 +4,9 @@ class DashboardController < ApplicationController
 	require 'open-uri'
 
 	def index
+
+                  
+
 	end
 
 
@@ -13,6 +16,9 @@ class DashboardController < ApplicationController
 		@page = Nokogiri::HTML(open(url))
 		#@data = @page.css("a.dev-link")[0]["href"]
 		@data1 = @page.css("a.see-more")
-
 	end
+
+
+
+
 end
