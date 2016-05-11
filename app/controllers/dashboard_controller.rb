@@ -5,9 +5,7 @@ class DashboardController < ApplicationController
 
 	def index
 
-                  
-
-	end
+    end
 
 
 	def scrap
