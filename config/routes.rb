@@ -12,7 +12,7 @@ require 'sidekiq/web'
 
   mount Sidekiq::Web ,at: '/sidekiq'
 
-  root to: "dashboard#show"
+  root to: "dashboard#scrap"
 
   get 'dashboard' => 'dashboard#index'
 
