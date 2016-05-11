@@ -67,7 +67,7 @@ class DashboardController < ApplicationController
 						@row_2 = [@app_info.css("div.id-app-title").text, dl["href"][7..-1]]
 					end
 				end
-				if !@xml_records.include? @app  #check record exist or not 
+				if !@xml_records.include? @app_info.css("div.id-app-title").text  #check record exist or not 
 
 				    # after any exisitng rows with data
 		            new_row_index = book.worksheet(0).last_row_index + 1
