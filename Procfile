@@ -1,0 +1,5 @@
+
+
+scheduler:bundle exec sidekiq 
+
+
