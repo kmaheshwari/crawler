@@ -28,19 +28,19 @@ class DashboardController < ApplicationController
 			book.write('test.xlsx')
 
 		elsif  File.file?("test.xlsx")
-			
-            @xml_records = []     
             Spreadsheet.client_encoding = 'UTF-8'
    
             book = Spreadsheet.open('test.xlsx') 
-            sheet1 = book.worksheet(0)
+        end
+    	@xml_records = []     
+        
+        sheet1 = book.worksheet(0)
 
-            sheet1.each_with_index do |row,index| 
-                if index != 0 
-                     @xml_records << row[0].to_s
-                end 
+        sheet1.each_with_index do |row,index| 
+            if index != 0 
+                 @xml_records << row[0].to_s
             end 
-	    end    
+        end    
 		url = "https://play.google.com/store/apps"
 		@page = Nokogiri::HTML(open(url))
 		#@data = @page.css("a.dev-link")[0]["href"]
