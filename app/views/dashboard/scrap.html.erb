@@ -1,7 +1,11 @@
 
 <%
+
 #!/usr/bin/env ruby
 require 'spreadsheet'
+
+
+# binding.pry
 
 # Begin Test
 print "Spreadsheet Test\n"
@@ -13,7 +17,7 @@ row_1 = ['AppName', 'Developer']
 new_book = Spreadsheet::Workbook.new
 
 # Create the worksheet
-new_book.create_worksheet :name => 'Sheet Name'
+new_book.create_worksheet :name => 'test'
 
 # Add row_1
 new_book.worksheet(0).insert_row(0, row_1)
@@ -66,10 +70,6 @@ new_row_index = open_book.worksheet(0).last_row_index + 1
 		<% open_book.worksheet(0).insert_row(new_row_index, @row_2) %>
 
 
-<%
-# Delete the file so that it can be re-written
-File.delete('test.xls')
-%>
 
 <%
 # Write out the Workbook again
