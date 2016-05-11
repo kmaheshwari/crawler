@@ -1,0 +1,15 @@
+<%
+
+require 'spreadsheet'    
+book = Spreadsheet.open('test.xls')
+sheet1 = book.worksheet(0) # can use an index or worksheet name
+
+%>
+
+
+<% sheet1.each_with_index do |row,index| %>
+   <% if index !=0 %>
+     <%= row[0] %> <br>
+      <% end %>
+<% end %>
+

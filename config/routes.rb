@@ -18,6 +18,8 @@ require 'sidekiq/web'
 
   get 'dashboard' => 'dashboard#index'
 
+  get 'dashboard/read' => 'dashboard#read'
+
   post 'dashboard/scrap' =>'dashboard#scrap'
 
 
