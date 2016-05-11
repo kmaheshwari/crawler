@@ -11,29 +11,36 @@ class DashboardController < ApplicationController
 		# Begin Test
 		print "Spreadsheet Test\n"
 
-		# Create the rows to be inserted
-		row_1 = ['AppName', 'Developer']
+		if !File.file?("test.xlsx") 
+			# Create the rows to be inserted
+			row_1 = ['AppName', 'Developer']
 
-		# Create a new Workbook
-		new_book = Spreadsheet::Workbook.new
+			# Create a new Workbook
+			book = Spreadsheet::Workbook.new
 
-		# Create the worksheet
-		new_book.create_worksheet :name => 'Sheet Name'
+			# Create the worksheet
+			book.create_worksheet :name => 'test'
 
-		# Add row_1
-		new_book.worksheet(0).insert_row(0, row_1)
+			# Add row_1
+			book.worksheet(0).insert_row(0, row_1)
 
-		# Write the file
-		new_book.write('test.xls')
+			# Write the file
+			book.write('test.xlsx')
 
-		# Open the previously created Workbook
-		open_book = Spreadsheet.open('test.xls')
+		elsif  File.file?("test.xlsx")
+			
+            @xml_records = []     
+            Spreadsheet.client_encoding = 'UTF-8'
+   
+            book = Spreadsheet.open('test.xlsx') 
+            sheet1 = book.worksheet(0)
 
-		# Get the row index in order to append a new row 
-		# after any exisitng rows with data
-		new_row_index = open_book.worksheet(0).last_row_index + 1
-
-		#url =  params[:cateogry].to_s
+            sheet1.each_with_index do |row,index| 
+                if index != 0 
+                     @xml_records << row[0].to_s
+                end 
+            end 
+	    end    
 		url = "https://play.google.com/store/apps"
 		@page = Nokogiri::HTML(open(url))
 		#@data = @page.css("a.dev-link")[0]["href"]
@@ -60,14 +67,21 @@ class DashboardController < ApplicationController
 						@row_2 = [@app_info.css("div.id-app-title").text, dl["href"][7..-1]]
 					end
 				end
-				open_book.worksheet(0).insert_row(new_row_index, @row_2)
+				if !@xml_records.include? @app  #check record exist or not 
 
-				# Delete the file so that it can be re-written
-				File.delete('test.xls')
+				    # after any exisitng rows with data
+		            new_row_index = book.worksheet(0).last_row_index + 1
+				    book.worksheet(0).insert_row(new_row_index, @row_2) 
+    		    end 
+    		    book.write('test.xls')
 				
-				# Write out the Workbook again
-				open_book.write('test.xls')
 			end
 		end
-	end
+		
+    end
+
+    def downloadexcel
+     send_file 'test.xls', :type=>"application/xls", :x_sendfile=>true
+    end
+
 end
