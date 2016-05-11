@@ -21,6 +21,7 @@ require 'sidekiq/web'
 
   post 'dashboard/scrap' =>'dashboard#scrap'
 
+  get 'dashboard/downloadexcel' =>'dashboard/downloadexcel'
 
   
   # The priority is based upon order of creation: first created -> highest priority.

@@ -14,11 +14,11 @@ class DashboardController < ApplicationController
 		@page = Nokogiri::HTML(open(url))
 		#@data = @page.css("a.dev-link")[0]["href"]
 		@data1 = @page.css("a.see-more")
-		
-	end
 
+    end
 
-
-
+    def downloadexcel
+     send_file '/home/rajiv/Rails Apps/crawler/test.xls', :type=>"application/xls", :x_sendfile=>true
+    end
 
 end
