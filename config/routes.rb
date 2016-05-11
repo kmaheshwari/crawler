@@ -8,15 +8,13 @@ Rails.application.routes.draw do
   resources :sessions, only: [:create, :destroy]
   resource :home, only: [:show]
 
-<<<<<<< HEAD
-  root to: "dashboard#index"
-=======
+
+  root to: "dashboard#scrap"
 require 'sidekiq/web'
 
   mount Sidekiq::Web ,at: '/sidekiq'
 
   root to: "dashboard#show"
->>>>>>> bd24b748ad5395648a939a51a25038a867dfb2c1
 
   get 'dashboard' => 'dashboard#index'
 
