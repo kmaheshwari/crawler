@@ -14,11 +14,10 @@ require 'sidekiq/web'
 
   mount Sidekiq::Web ,at: '/sidekiq'
 
-  root to: "dashboard#show"
-
   get 'dashboard' => 'dashboard#index'
 
   get 'dashboard/read' => 'dashboard#read'
+  #get 'dashboard/show' => 'dashboard#show'
 
   post 'dashboard/scrap' =>'dashboard#scrap'
 
